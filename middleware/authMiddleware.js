@@ -34,7 +34,7 @@ const isAdmin = async (req, res, next) => {
 
     return next(ApiError.forbidden(Messages.NOT_ADMIN));
   } catch (error) {
-    return next(ApiError.internalServerError("Internal server error"));
+    return next(ApiError.internal(Messages.INTERNAL_ERROR));
   }
 };
 
