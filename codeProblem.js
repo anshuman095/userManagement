@@ -38,10 +38,8 @@ function countDuplicates(arr) {
 }
 const arr = [1, 2, 2, 3, 4, 4, 4, 5];
 
-// Get unique values
 const uniqueValues = findUniqueValues(arr);
 
-// Get duplicate counts
 const duplicateCount = countDuplicates(arr);
 
 console.log("Unique Values=", uniqueValues);
