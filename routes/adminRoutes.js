@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { authMiddleware, isAdmin } = require("../middleware/authMiddleware");
-const { updateUserActiveStatus } = require("../controllers/adminController");
+const { updateStatus } = require("../controllers/adminController");
 
-router.patch("/:id", authMiddleware, isAdmin, updateUserActiveStatus);
+router.patch("/:id", authMiddleware, isAdmin, updateStatus);
 
 module.exports = router;

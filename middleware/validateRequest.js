@@ -1,11 +1,18 @@
 const Joi = require("joi");
 
 const userSchema = Joi.object({
-  name: Joi.string().min(1).max(255).required().messages({
-    "string.base": "Name must be a string",
-    "string.empty": "Name cannot be empty",
-    "any.required": "Name is required",
-  }),
+  name: Joi.string()
+    .regex(/^[a-zA-Z\s]+$/)
+    .min(1)
+    .max(255)
+    .required()
+    .messages({
+      "string.base": "Name must be a string",
+      "string.empty": "Name cannot be empty",
+      "string.pattern.base":
+        "Name must only contain alphabetic characters",
+      "any.required": "Name is required",
+    }),
   email: Joi.string().email().required().messages({
     "string.base": "Email must be a string",
     "string.email": "Email must be a valid email",

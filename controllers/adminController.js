@@ -5,7 +5,7 @@ const Messages = require("../utils/message");
 const userService = require("../services/userService");
 const { validateStatus } = require("../middleware/validateRequest");
 
-const updateUserActiveStatus = async (req, res, next) => {
+const updateStatus = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { isActive } = req.body;
@@ -33,5 +33,5 @@ const updateUserActiveStatus = async (req, res, next) => {
 };
 
 module.exports = {
-  updateUserActiveStatus,
+  updateStatus,
 };
