@@ -16,6 +16,10 @@ exports.register = async (req, res, next) => {
       return next(ApiError.badRequest("Profile picture is required"));
     }
 
+    if (req.body.email) {
+      req.body.email = req.body.email.trim();
+    }
+
     const validationResult = validateUser(req.body);
     if (validationResult.error) {
       fs.unlink(req.file.path, (unlinkErr) => {
@@ -51,11 +55,13 @@ exports.register = async (req, res, next) => {
 };
 
 exports.login = async (req, res, next) => {
-  const { email, password } = req.body;
+  let { email, password } = req.body;
 
   if (!email || !password) {
     return next(ApiError.badRequest(Messages.EMAIL_AND_PASSWORD_REQUIRED));
   }
+
+  email = email.trim();
 
   try {
     const { token } = await authService.login(email, password);
