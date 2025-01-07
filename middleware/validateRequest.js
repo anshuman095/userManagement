@@ -9,8 +9,7 @@ const userSchema = Joi.object({
     .messages({
       "string.base": "Name must be a string",
       "string.empty": "Name cannot be empty",
-      "string.pattern.base":
-        "Name must only contain alphabetic characters",
+      "string.pattern.base": "Name must only contain alphabetic characters",
       "any.required": "Name is required",
     }),
   email: Joi.string().email().required().messages({
@@ -72,17 +71,19 @@ const validateWithUnknownCheck = (schema, data) => {
 const validateUser = (data) => validateWithUnknownCheck(userSchema, data);
 
 const updateUserSchema = Joi.object({
-  name: Joi.string().min(1).max(255).optional().messages({
-    "string.base": "Name must be a string",
-    "string.empty": "Name cannot be empty",
-  }),
+  name: Joi.string()
+    .regex(/^[a-zA-Z\s]+$/)
+    .min(1)
+    .max(255)
+    .optional()
+    .messages({
+      "string.base": "Name must be a string",
+      "string.pattern.base": "Name must only contain alphabetic characters",
+    }),
   profile_pic: Joi.string().optional().messages({
     "string.base": "Profile pic must be a string",
   }),
-})
-  .strict()
-  .unknown(false);
-
+}).strict();
 const validateUpdateUser = (data) =>
   validateWithUnknownCheck(updateUserSchema, data);
 
@@ -96,7 +97,6 @@ const roleSchema = Joi.object({
     "string.base": "Description must be a string",
   }),
 });
-
 const validateRole = (data) => {
   return roleSchema.validate(data, { abortEarly: false, convert: false });
 };

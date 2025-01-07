@@ -6,19 +6,18 @@ const Messages = require("../utils/message");
 const { StatusCodes } = require("http-status-codes");
 
 exports.updateUser = async (req, res, next) => {
-  const { id } = req.params;
-
-  const validationResult = validateUpdateUser(req.body);
-  if (validationResult.error) {
-    return next(ApiError.badRequest(validationResult.messages[0]));
-  }
-
   upload(req, res, async (err) => {
     if (err) {
-      return next(ApiError.badRequest(err.message)); 
+      return next(ApiError.badRequest(err.message));
+    }
+
+    const validationResult = validateUpdateUser(req.body);
+    if (validationResult.error) {
+      return next(ApiError.badRequest(validationResult.messages[0]));
     }
 
     try {
+      const { id } = req.params;
       const user = await userService.getUserById(id);
 
       const { name } = req.body;

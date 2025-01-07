@@ -30,7 +30,12 @@ const updateUser = async (id, updatedData) => {
       throw ApiError.notFound(Messages.USER_NOT_FOUND);
     }
 
-    return { id, name, profile_pic };
+    const [rows] = await pool.query("SELECT * FROM users WHERE id = ?", [id]);
+    if (rows.length === 0) {
+      throw ApiError.notFound(Messages.USER_NOT_FOUND);
+    }
+
+    return rows[0];
   } catch (error) {
     throw ApiError.internal(Messages.INTERNAL_ERROR);
   }

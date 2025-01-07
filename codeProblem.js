@@ -15,26 +15,34 @@ function isPalindrome(str) {
 console.log(isPalindrome("racecar"));
 console.log(isPalindrome("hello"));
 
-function findUniqueAndCountDuplicates(arr) {
-  const uniqueValues = new Set();
+// Function to find unique values from an array
+function findUniqueValues(arr) {
+  const uniqueValues = new Set(arr);
+  return [...uniqueValues];
+}
+
+// Function to count duplicate values in an array
+function countDuplicates(arr) {
   const duplicateCount = {};
+  const values = new Set();
 
   for (const value of arr) {
-    if (uniqueValues.has(value)) {
+    if (values.has(value)) {
       duplicateCount[value] = (duplicateCount[value] || 1) + 1;
     } else {
-      uniqueValues.add(value);
+      values.add(value);
     }
   }
 
-  return {
-    uniqueValues: [...uniqueValues],
-    duplicateCount,
-  };
+  return duplicateCount;
 }
-
 const arr = [1, 2, 2, 3, 4, 4, 4, 5];
-const result = findUniqueAndCountDuplicates(arr);
 
-console.log("Unique Values=", result.uniqueValues);
-console.log("Duplicate Count=", result.duplicateCount);
+// Get unique values
+const uniqueValues = findUniqueValues(arr);
+
+// Get duplicate counts
+const duplicateCount = countDuplicates(arr);
+
+console.log("Unique Values=", uniqueValues);
+console.log("Duplicate Count=", duplicateCount);
