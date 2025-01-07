@@ -4,6 +4,8 @@ const Messages = {
   EMAIL_MUST_BE_UNIQUE: "Email must be unique",
   USER_NOT_FOUND: "User not found",
   ROLE_NOT_FOUND: "The specified role does not exist",
+  PROFILE_REQUIRED: "Profile picture is required",
+  ERROR_DEL_FILE: "Error deleting file:",
   USER_ADD_SUCCESS: "User created successfully",
   USER_ADD_FAILED: "Failed to create user",
   USER_UPDATE_SUCCESS: "User updated successfully",

@@ -13,7 +13,7 @@ exports.register = async (req, res, next) => {
     }
 
     if (req.file === undefined) {
-      return next(ApiError.badRequest("Profile picture is required"));
+      return next(ApiError.badRequest(Messages.PROFILE_REQUIRED));
     }
 
     if (req.body.email) {
